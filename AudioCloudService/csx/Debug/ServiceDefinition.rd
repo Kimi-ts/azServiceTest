@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="AudioCloudService" generation="1" functional="0" release="0" Id="e776f549-d0da-4f84-b121-1b1679ee51b4" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="AudioCloudService" generation="1" functional="0" release="0" Id="1117a61a-6d55-4cac-9139-0fd05ded2e8c" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="AudioCloudServiceGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -110,9 +110,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="c5831f9b-478a-49a5-a601-4e1b7945aab0" ref="Microsoft.RedDog.Contract\ServiceContract\AudioCloudServiceContract@ServiceDefinition">
+    <implementation Id="344d19a8-cce2-4ee0-8785-458223f7faed" ref="Microsoft.RedDog.Contract\ServiceContract\AudioCloudServiceContract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="78d1903b-1a20-4c90-ad3c-b125e9a4c689" ref="Microsoft.RedDog.Contract\Interface\AudioWeb:Endpoint1@ServiceDefinition">
+        <interfaceReference Id="f8f8f982-5b97-4c4e-9269-b0cf41b68cc8" ref="Microsoft.RedDog.Contract\Interface\AudioWeb:Endpoint1@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/AudioCloudService/AudioCloudServiceGroup/AudioWeb:Endpoint1" />
           </inPort>
