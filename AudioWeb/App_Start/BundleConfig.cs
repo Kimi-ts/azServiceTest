@@ -7,6 +7,10 @@ namespace AudioWeb
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Add(new ScriptBundle("~/bundles/AudioApp")
+                .IncludeDirectory("~/Scripts/Controllers", "*.js")
+                .IncludeDirectory("~/Scripts/Factories", "*.js")
+                .Include("~/Scripts/audioApp.js"));
         }
     }
 }
