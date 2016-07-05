@@ -1,12 +1,25 @@
 ﻿<!DOCTYPE html>
-<html ng-app>
+<html>
 <head>
-    <title ng-bind="helloAngular"></title>
+    <title>Audio</title>
+    @Styles.Render("~/Content/SiteStyles")
 </head>
 <body>
 
-    <input type="text" ng-model="helloAngular" />
-    <h1>{{helloAngular}}</h1>
+    <div ng-app="module1" ng-controller="controller1">
+        <div>
+            <button ng-click="play(currentAudio.audio)">Play</button>
+            <button ng-click="reset(currentAudio.audio)">Reset</button>
+            <button ng-click="playNext(currentAudio)">Next</button>
+            <button ng-click="playPrev(currentAudio)">Prev</button>
+            <input type="range" step="0.01" min="0" max="1" ng-model="currentAudio.audio.progress" />
+            <label>{{currentAudio.audio.progress}}</label>
+
+        </div>
+        <div class="song" ng-class="{'current': (audio == currentAudio)}" ng-repeat="audio in audios" ng-click="playSong(audio)">
+            <p>{{audio.name}} <span> Plays: {{audio.plays}};</span><span> Skips: {{audio.skips}}</span></p>
+        </div>
+    </div>
 
     @*<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>*@
     @Scripts.Render("~/bundles/audioApp")

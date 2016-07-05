@@ -15,3 +15,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.song {
+    cursor: pointer;
+}
+
+.song.current {
+    color: blue;
+}
