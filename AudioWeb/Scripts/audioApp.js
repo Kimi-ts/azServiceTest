@@ -67,28 +67,27 @@ app.controller("controller1", ['$scope', 'ngAudio', 'AudioData', function ($scop
     $scope.playPrev = function (audio) {
         if (audio.playlistIndex > 0) {
             $scope.playSong($scope.audios[audio.playlistIndex - 1]);
-        }
+        };
     };
 
-    //audioEntity
-    //$scope.refreshData = function () {
-
-    //    audioData.get({
-    //    }).then(function (response) {
-    //        console.log(response.data);
-    //        if (response.data) {
-
-    //            $.map($scope.audios, function (val, i) {
-    //                var audio = val.audio;
-    //                val.audio.complete(function () {
-    //                    if (audio.paused) {
-    //                        audio.setProgress(0);
-    //                        $scope.playNext(val);
-    //                    }
-    //                    return false;
-    //                });
-    //            });
-    //        }
-    //    });
-    //};
+    $scope.refreshData = function () {
+        audioData.getAll({
+        }).then(function (response) {
+            if (response.data) {
+                $.map($scope.audios, function (val, i) {
+                    $.each(response.data, function (index, item) {
+                        if (item.Name == val.name) {
+                            if (item.Skips != val.skips) {
+                                val.skips = item.Skips;
+                            }
+                            if (item.Plays != val.plays) {
+                                val.plays = item.Plays;
+                            }
+                            return false;
+                        }
+                    });
+                });
+            }
+        });
+    };
 }]);

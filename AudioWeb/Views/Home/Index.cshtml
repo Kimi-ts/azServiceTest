@@ -19,9 +19,9 @@
         <div class="song" ng-class="{'current': (audio == currentAudio)}" ng-repeat="audio in audios" ng-click="playSong(audio)">
             <p>{{audio.name}} <span> Plays: {{audio.plays}};</span><span> Skips: {{audio.skips}}</span></p>
         </div>
+        <div><button ng-click="refreshData()">Refresh</button></div>
     </div>
 
-    @*<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>*@
     @Scripts.Render("~/bundles/audioApp")
 </body>
 </html>
