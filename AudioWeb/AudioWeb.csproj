@@ -154,9 +154,11 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\" />
+    <Folder Include="bower_components\angular-audio\app\audio\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\Controllers\" />
     <Folder Include="Scripts\Factories\" />
+    <Folder Include="Scripts\Lib\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -172,6 +174,56 @@
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bower_components\angular-audio\.gitattributes" />
+    <Content Include="bower_components\angular-audio\.gitignore" />
+    <Content Include="bower_components\angular-audio\app\404.html" />
+    <Content Include="bower_components\angular-audio\app\angular.audio.js" />
+    <Content Include="bower_components\angular-audio\app\favicon.ico" />
+    <Content Include="bower_components\angular-audio\app\index.html" />
+    <Content Include="bower_components\angular-audio\app\partial\audioEditView.html" />
+    <Content Include="bower_components\angular-audio\app\partial\audioFullView.html" />
+    <Content Include="bower_components\angular-audio\app\partial\audioTableView.html" />
+    <Content Include="bower_components\angular-audio\app\partial\home.html" />
+    <Content Include="bower_components\angular-audio\app\partial\ngAudioDocs.html" />
+    <Content Include="bower_components\angular-audio\app\robots.txt" />
+    <Content Include="bower_components\angular-audio\app\scripts\main.js" />
+    <Content Include="bower_components\angular-audio\app\styles\main.css" />
+    <Content Include="bower_components\angular-audio\css\bootstrap-theme.css" />
+    <Content Include="bower_components\angular-audio\css\bootstrap-theme.min.css" />
+    <Content Include="bower_components\angular-audio\css\bootstrap.css" />
+    <Content Include="bower_components\angular-audio\css\bootstrap.min.css" />
+    <Content Include="bower_components\angular-audio\css\shCore.css" />
+    <Content Include="bower_components\angular-audio\css\shCoreDefault.css" />
+    <Content Include="bower_components\angular-audio\css\shCoreDjango.css" />
+    <Content Include="bower_components\angular-audio\css\shCoreEclipse.css" />
+    <Content Include="bower_components\angular-audio\css\shCoreEmacs.css" />
+    <Content Include="bower_components\angular-audio\css\shCoreFadeToGrey.css" />
+    <Content Include="bower_components\angular-audio\css\shCoreMDUltra.css" />
+    <Content Include="bower_components\angular-audio\css\shCoreMidnight.css" />
+    <Content Include="bower_components\angular-audio\css\shCoreRDark.css" />
+    <Content Include="bower_components\angular-audio\css\shThemeDefault.css" />
+    <Content Include="bower_components\angular-audio\css\shThemeDjango.css" />
+    <Content Include="bower_components\angular-audio\css\shThemeEclipse.css" />
+    <Content Include="bower_components\angular-audio\css\shThemeEmacs.css" />
+    <Content Include="bower_components\angular-audio\css\shThemeFadeToGrey.css" />
+    <Content Include="bower_components\angular-audio\css\shThemeMDUltra.css" />
+    <Content Include="bower_components\angular-audio\css\shThemeMidnight.css" />
+    <Content Include="bower_components\angular-audio\css\shThemeRDark.css" />
+    <Content Include="bower_components\angular-audio\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="bower_components\angular-audio\gulpfile.js" />
+    <Content Include="bower_components\angular-audio\index.js" />
+    <Content Include="bower_components\angular-audio\lib\angular.js" />
+    <Content Include="bower_components\angular-audio\lib\syntax\shAutoloader.js" />
+    <Content Include="bower_components\angular-audio\lib\syntax\shBrushJScript.js" />
+    <Content Include="bower_components\angular-audio\lib\syntax\shBrushXml.js" />
+    <Content Include="bower_components\angular-audio\lib\syntax\shCore.js" />
+    <Content Include="bower_components\angular-audio\lib\underscore.js" />
+    <Content Include="bower_components\angular-audio\test\index.html" />
+    <Content Include="bower_components\angular-audio\test\spec\test.js" />
+    <Content Include="bower_components\angular\angular-csp.css" />
+    <Content Include="bower_components\angular\angular.js" />
+    <Content Include="bower_components\angular\angular.min.js" />
+    <Content Include="bower_components\angular\index.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -187,14 +239,41 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="packages.config" />
-    <Content Include="package.json" />
-    <None Include="Project_Readme.html" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bower.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bower_components\angular-audio\.bower.json" />
+    <Content Include="bower_components\angular-audio\.editorconfig" />
+    <Content Include="bower_components\angular-audio\.jshintrc" />
+    <Content Include="bower_components\angular-audio\app\.htaccess" />
+    <Content Include="bower_components\angular-audio\app\_bower.json" />
+    <Content Include="bower_components\angular-audio\bower.json" />
+    <Content Include="bower_components\angular-audio\css\bootstrap-theme.css.map" />
+    <Content Include="bower_components\angular-audio\css\bootstrap.css.map" />
+    <Content Include="bower_components\angular-audio\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="bower_components\angular-audio\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="bower_components\angular-audio\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="bower_components\angular-audio\LICENSE" />
+    <Content Include="bower_components\angular-audio\package.json" />
+    <Content Include="bower_components\angular-audio\README.md" />
+    <Content Include="bower_components\angular-audio\test\.bowerrc" />
+    <Content Include="bower_components\angular-audio\test\bower.json" />
+    <Content Include="bower_components\angular\.bower.json" />
+    <Content Include="bower_components\angular\angular.min.js.gzip" />
+    <Content Include="bower_components\angular\angular.min.js.map" />
+    <Content Include="bower_components\angular\bower.json" />
+    <Content Include="bower_components\angular\LICENSE.md" />
+    <Content Include="bower_components\angular\package.json" />
+    <Content Include="bower_components\angular\README.md" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

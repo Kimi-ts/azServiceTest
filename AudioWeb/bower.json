@@ -1,0 +1,20 @@
+{
+  "name": "AudioWeb",
+  "homepage": "https://github.com/Kimi-ts/azServiceTest",
+  "authors": [
+    "Kimi Raikkonen <r-g@tut.by>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-audio": "~1.7.2"
+  }
+}
