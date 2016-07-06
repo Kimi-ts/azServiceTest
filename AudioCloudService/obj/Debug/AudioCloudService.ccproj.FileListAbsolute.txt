@@ -144,3 +144,11 @@ c:\users\tatyana.shvets\documents\visual studio 2015\Projects\AudioCloudService\
 c:\users\tatyana.shvets\documents\visual studio 2015\Projects\AudioCloudService\AudioCloudService\obj\Debug\AudioWorker\zh-Hant\Microsoft.Data.OData.resources.dll
 c:\users\tatyana.shvets\documents\visual studio 2015\Projects\AudioCloudService\AudioCloudService\obj\Debug\AudioWorker\zh-Hant\Microsoft.Data.Services.Client.resources.dll
 c:\users\tatyana.shvets\documents\visual studio 2015\Projects\AudioCloudService\AudioCloudService\obj\Debug\AudioWorker\zh-Hant\System.Spatial.resources.dll
+C:\Users\tatyana.shvets\documents\visual studio 2015\Projects\AudioCloudService\AudioCloudService\obj\Debug\AudioWeb\bin\Models.dll
+C:\Users\tatyana.shvets\documents\visual studio 2015\Projects\AudioCloudService\AudioCloudService\obj\Debug\AudioWeb\bin\Models.pdb
+C:\Users\tatyana.shvets\documents\visual studio 2015\Projects\AudioCloudService\AudioCloudService\obj\Debug\AudioWeb\bin\StorageCommon.dll
+C:\Users\tatyana.shvets\documents\visual studio 2015\Projects\AudioCloudService\AudioCloudService\obj\Debug\AudioWeb\bin\StorageCommon.pdb
+C:\Users\tatyana.shvets\documents\visual studio 2015\Projects\AudioCloudService\AudioCloudService\obj\Debug\AudioWorker\Models.dll
+C:\Users\tatyana.shvets\documents\visual studio 2015\Projects\AudioCloudService\AudioCloudService\obj\Debug\AudioWorker\Models.pdb
+C:\Users\tatyana.shvets\documents\visual studio 2015\Projects\AudioCloudService\AudioCloudService\obj\Debug\AudioWorker\StorageCommon.dll
+C:\Users\tatyana.shvets\documents\visual studio 2015\Projects\AudioCloudService\AudioCloudService\obj\Debug\AudioWorker\StorageCommon.pdb

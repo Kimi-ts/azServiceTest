@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.WindowsAzure;
 //using Microsoft.WindowsAzure.Diagnostics;
 using Microsoft.WindowsAzure.ServiceRuntime;
-using Microsoft.WindowsAzure.Storage;
-using AudioWorker.Utils;
+using StorageCommon;
 
 namespace AudioWorker
 {

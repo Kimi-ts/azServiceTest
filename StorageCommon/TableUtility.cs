@@ -1,12 +1,12 @@
-﻿using AudioWeb.Models;
-using Microsoft.WindowsAzure.Storage;
+﻿using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace AudioWeb.Utils
+namespace StorageCommon
 {
     public class TableUtility
     {

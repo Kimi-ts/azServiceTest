@@ -4,3 +4,7 @@ AudioCloudService/bin/
 AudioCloudService/obj/
 AudioWorker/obj/
 AudioWeb/obj/
+StorageCommon/obj/
+Models/obj/
+StorageCommon/bin/
+Models/bin/

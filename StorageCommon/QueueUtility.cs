@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace AudioWeb.Utils
+namespace StorageCommon
 {
     public class QueueUtility
     {
