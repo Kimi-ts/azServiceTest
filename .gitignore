@@ -1,2 +1,6 @@
 AudioWeb/bower_components/
 packages/
+AudioCloudService/bin/
+AudioCloudService/obj/
+AudioWorker/obj/
+AudioWeb/obj/

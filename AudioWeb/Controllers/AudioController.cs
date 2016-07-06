@@ -13,11 +13,13 @@ namespace AudioWeb.Controllers
     {
         private FileUtility _audioStorage;
         private TableUtility _tableUtility;
+        private QueueUtility _queueUtility;
 
         public AudioController()
         {
             _audioStorage = new FileUtility("zz1zz", "RDYGKOyoiv2nZMD8qXrIHY+gcLE2I5c3vnaPQBuubRNEt7+V/8/iTTwPgu3mQWiyfrpKSrIF2m6FgzaX4jB5Ow==");
             _tableUtility = new TableUtility("zz1zz", "RDYGKOyoiv2nZMD8qXrIHY+gcLE2I5c3vnaPQBuubRNEt7+V/8/iTTwPgu3mQWiyfrpKSrIF2m6FgzaX4jB5Ow==");
+            _queueUtility = new QueueUtility("zz1zz", "RDYGKOyoiv2nZMD8qXrIHY+gcLE2I5c3vnaPQBuubRNEt7+V/8/iTTwPgu3mQWiyfrpKSrIF2m6FgzaX4jB5Ow==");
         }
 
         // GET: api/values
@@ -37,7 +39,16 @@ namespace AudioWeb.Controllers
 
             //call this to inc plays
             //_tableUtility.UpdateAudioData(true, false, "09_royal_blood_ten_tonne_skeleton_myzuka.fm.mp3");
+            //just to test - add a message to the audioQueue
+            _queueUtility.UpdatePlays("09_royal_blood_ten_tonne_skeleton_myzuka.fm.mp3");
             return audios;
+        }
+
+        [HttpPut]
+        public bool Put(bool isPlayed, bool isSkipped, string songName)
+        {
+
+            return true;
         }
     }
 }
