@@ -22,7 +22,7 @@ namespace AudioWeb.Controllers
             _queueUtility = new QueueUtility("zz1zz", "RDYGKOyoiv2nZMD8qXrIHY+gcLE2I5c3vnaPQBuubRNEt7+V/8/iTTwPgu3mQWiyfrpKSrIF2m6FgzaX4jB5Ow==");
         }
 
-        // GET: api/values
+        // GET: api/audio
         [HttpGet]
         public IEnumerable<Audio> Get()
         {
@@ -44,14 +44,17 @@ namespace AudioWeb.Controllers
             return audios;
         }
 
+        // PUT: api/audio/IncPlays
         [HttpPut]
         public void IncPlays([FromBody]string songName)
         {
+            _queueUtility.UpdatePlays(songName);
         }
 
         [HttpPut]
         public void IncSkips([FromBody]string songName)
         {
+            _queueUtility.UpdateSkips(songName);
         }
     }
 }
