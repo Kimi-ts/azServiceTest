@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Routing;
 
 namespace AudioWeb
 {
@@ -13,6 +15,12 @@ namespace AudioWeb
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                name: "CustomPatchApi",
+                routeTemplate: "api/{controller}/{action}",
+                defaults: new { httpMethod = new HttpMethodConstraint(HttpMethod.Put) }
+            );
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
