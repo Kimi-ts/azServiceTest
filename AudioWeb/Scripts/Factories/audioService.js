@@ -4,6 +4,15 @@
             return $http.get('/api/audio', {
                 params: params
             });
+        },
+
+        incPlays: function (params) {
+            return $http({
+                method: "PUT",
+                url: "/api/audio/IncPlays",
+                data: JSON.stringify(params),
+                headers: { "Content-Type": "application/json", Accept: "application/json" } 
+            });
         }
     }
 }]);

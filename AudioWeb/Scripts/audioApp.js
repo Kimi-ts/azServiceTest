@@ -30,6 +30,7 @@ app.controller("controller1", ['$scope', 'ngAudio', 'AudioData', function ($scop
                     if (audio.paused) {
                         audio.setProgress(0);
                         $scope.playNext(val);
+                        incPlays(val.name);
                     }
                     return false;
                 });
@@ -90,4 +91,8 @@ app.controller("controller1", ['$scope', 'ngAudio', 'AudioData', function ($scop
             }
         });
     };
+
+    var incPlays = function (songName) {
+        audioData.incPlays(songName);
+    }
 }]);
