@@ -47,7 +47,7 @@
     </ProjectReference>
     <ProjectReference Include="..\AudioWorker\AudioWorker.csproj">
       <Name>AudioWorker</Name>
-      <Project>{e736f49a-700b-4513-ac11-d127a03d8b12}</Project>
+      <Project>{3b395123-1be5-418a-b15f-2693c50aa31c}</Project>
       <Private>True</Private>
       <RoleType>Worker</RoleType>
       <RoleName>AudioWorker</RoleName>

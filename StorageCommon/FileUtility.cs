@@ -12,17 +12,17 @@ namespace StorageCommon
     {
         private string _folderName = "music";
 
-        public CloudStorageAccount storageAccount;
+        private CloudStorageAccount _storageAccount;
 
         public FileUtility(string accountName, string accountKey)
         {
             string UserConnectionString = string.Format("DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1}", accountName, accountKey);
-            storageAccount = CloudStorageAccount.Parse(UserConnectionString);
+            _storageAccount = CloudStorageAccount.Parse(UserConnectionString);
         }
 
         public List<Audio> DownloadAllFiles()
         {
-            CloudFileClient fileClient = storageAccount.CreateCloudFileClient();
+            CloudFileClient fileClient = _storageAccount.CreateCloudFileClient();
             CloudFileShare fileShare = fileClient.GetShareReference(_folderName);
 
             List<IListFileItem> results = new List<IListFileItem>();

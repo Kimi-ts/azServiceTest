@@ -12,19 +12,19 @@ namespace StorageCommon
     {
         private string _tableName = "MusicMetrics";
 
-        public CloudStorageAccount storageAccount;
+        private CloudStorageAccount _storageAccount;
 
         public TableUtility(string accountName, string accountKey)
         {
             string UserConnectionString = string.Format("DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1}", accountName, accountKey);
-            storageAccount = CloudStorageAccount.Parse(UserConnectionString);
+            _storageAccount = CloudStorageAccount.Parse(UserConnectionString);
         }
 
         public List<AudioEntity> ReadAll()
         {
             var audios = new List<AudioEntity>();
 
-            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
+            CloudTableClient tableClient = _storageAccount.CreateCloudTableClient();
 
             CloudTable table = tableClient.GetTableReference(_tableName);
             TableQuery<AudioEntity> query = new TableQuery<AudioEntity>();
@@ -38,7 +38,7 @@ namespace StorageCommon
 
         public void UpdateAudioData(bool isPlayed, bool isSkipped, string songTitle)
         {
-            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
+            CloudTableClient tableClient = _storageAccount.CreateCloudTableClient();
             CloudTable table = tableClient.GetTableReference(_tableName);
             TableOperation retrieveOperation = TableOperation.Retrieve<AudioEntity>(songTitle, songTitle);
             TableResult retrievedResult = table.Execute(retrieveOperation);

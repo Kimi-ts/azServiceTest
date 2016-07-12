@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
-//using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure;
-//using Microsoft.WindowsAzure.Diagnostics;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using StorageCommon;
+using Microsoft.WindowsAzure.Storage.Queue;
 
 namespace AudioWorker
 {
@@ -16,14 +15,11 @@ namespace AudioWorker
     {
         private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent runCompleteEvent = new ManualResetEvent(false);
-
-        private TableUtility _tableUtility;
+        private readonly TableUtility _tableUtility = new TableUtility("zz1zz", "RDYGKOyoiv2nZMD8qXrIHY+gcLE2I5c3vnaPQBuubRNEt7+V/8/iTTwPgu3mQWiyfrpKSrIF2m6FgzaX4jB5Ow==");
+        private readonly QueueUtility _queueUtility = new QueueUtility("zz1zz", "RDYGKOyoiv2nZMD8qXrIHY+gcLE2I5c3vnaPQBuubRNEt7+V/8/iTTwPgu3mQWiyfrpKSrIF2m6FgzaX4jB5Ow==");
 
         public override void Run()
         {
-            //Trace.TraceInformation("AudioWorker is running");
-            //System.Diagnostics.Debug.WriteLine("AudioWorker is running Hello World");
-            _tableUtility = new TableUtility("zz1zz", "RDYGKOyoiv2nZMD8qXrIHY+gcLE2I5c3vnaPQBuubRNEt7+V/8/iTTwPgu3mQWiyfrpKSrIF2m6FgzaX4jB5Ow==");
             try
             {
                 this.RunAsync(this.cancellationTokenSource.Token).Wait();
@@ -36,41 +32,44 @@ namespace AudioWorker
 
         public override bool OnStart()
         {
-            // Set the maximum number of concurrent connections
             ServicePointManager.DefaultConnectionLimit = 12;
 
-            // For information on handling configuration changes
-            // see the MSDN topic at http://go.microsoft.com/fwlink/?LinkId=166357.
-
             bool result = base.OnStart();
-
-            //Trace.TraceInformation("AudioWorker has been started");
-            System.Diagnostics.Debug.WriteLine("on start hello");
 
             return result;
         }
 
         public override void OnStop()
         {
-            //Trace.TraceInformation("AudioWorker is stopping");
-
             this.cancellationTokenSource.Cancel();
             this.runCompleteEvent.WaitOne();
 
             base.OnStop();
-
-            //Trace.TraceInformation("AudioWorker has stopped");
         }
 
         private async Task RunAsync(CancellationToken cancellationToken)
         {
-            // TODO: Replace the following with your own logic.
+            CloudQueueMessage playsMsg = null;
+            CloudQueueMessage skipsMsg = null;
+            var playsQueue = _queueUtility.getQueue("plays");
+            var skipsQueue = _queueUtility.getQueue("skips");
             while (!cancellationToken.IsCancellationRequested)
             {
-                //Trace.TraceInformation("Working");
+                playsMsg = playsQueue.GetMessage();
+                if (playsMsg != null)
+                {
+                    var songName = StringUtility.GetString(playsMsg.AsBytes);
+                    _tableUtility.UpdateAudioData(true, false, songName);
+                    playsQueue.DeleteMessage(playsMsg);
 
-
-                System.Diagnostics.Debug.WriteLine("working hello world");
+                }
+                skipsMsg = skipsQueue.GetMessage();
+                if (skipsMsg != null)
+                {
+                    var songName = StringUtility.GetString(skipsMsg.AsBytes);
+                    _tableUtility.UpdateAudioData(false, true, songName);
+                    playsQueue.DeleteMessage(skipsMsg);
+                }
                 await Task.Delay(1000);
             }
         }

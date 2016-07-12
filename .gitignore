@@ -8,3 +8,5 @@ StorageCommon/obj/
 Models/obj/
 StorageCommon/bin/
 Models/bin/
+AudioCloudService/csx/
+AudioWorker/bin/

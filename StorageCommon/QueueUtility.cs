@@ -14,12 +14,12 @@ namespace StorageCommon
         private string _queueIncPlays = "plays";
         private string _queueIncSkips = "skips";
 
-        private CloudStorageAccount storageAccount;
+        private CloudStorageAccount _storageAccount;
 
         public QueueUtility(string accountName, string accountKey)
         {
             string UserConnectionString = string.Format("DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1}", accountName, accountKey);
-            storageAccount = CloudStorageAccount.Parse(UserConnectionString);
+            _storageAccount = CloudStorageAccount.Parse(UserConnectionString);
         }
 
         public bool UpdatePlays(string songName)
@@ -50,14 +50,24 @@ namespace StorageCommon
             {
                 return false;
             }
-            CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
-            var audioQueue = queueClient.GetQueueReference(queueName);
-            audioQueue.CreateIfNotExists();
+            //CloudQueueClient queueClient = _storageAccount.CreateCloudQueueClient();
+            //var audioQueue = queueClient.GetQueueReference(queueName);
+            //audioQueue.CreateIfNotExists();
+
+            var audioQueue = getQueue(queueName);
 
             var message = StringUtility.GetBytes(songName);
             audioQueue.AddMessage(new CloudQueueMessage(message));
 
             return true;
+        }
+
+        public CloudQueue getQueue(string queueName)
+        {
+            CloudQueueClient queueClient = _storageAccount.CreateCloudQueueClient();
+            var audioQueue = queueClient.GetQueueReference(queueName);
+            audioQueue.CreateIfNotExists();
+            return audioQueue;
         }
     }
 }
