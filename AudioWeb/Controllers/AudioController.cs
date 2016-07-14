@@ -37,10 +37,6 @@ namespace AudioWeb.Controllers
                 song.Skips = skips;
             }
 
-            //call this to inc plays
-            //_tableUtility.UpdateAudioData(true, false, "09_royal_blood_ten_tonne_skeleton_myzuka.fm.mp3");
-            //just to test - add a message to the audioQueue
-            //_queueUtility.UpdatePlays("09_royal_blood_ten_tonne_skeleton_myzuka.fm.mp3");
             return audios;
         }
 

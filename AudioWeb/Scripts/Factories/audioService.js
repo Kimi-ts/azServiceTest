@@ -13,6 +13,14 @@
                 data: JSON.stringify(params),
                 headers: { "Content-Type": "application/json", Accept: "application/json" } 
             });
+        },
+        incSkips: function (params) {
+            return $http({
+                method: "PUT",
+                url: "/api/audio/IncSkips",
+                data: JSON.stringify(params),
+                headers: { "Content-Type": "application/json", Accept: "application/json" }
+            });
         }
     }
 }]);

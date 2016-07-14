@@ -68,9 +68,9 @@ namespace AudioWorker
                 {
                     var songName = StringUtility.GetString(skipsMsg.AsBytes);
                     _tableUtility.UpdateAudioData(false, true, songName);
-                    playsQueue.DeleteMessage(skipsMsg);
+                    skipsQueue.DeleteMessage(skipsMsg);
                 }
-                await Task.Delay(1000);
+                await Task.Delay(2000);
             }
         }
     }

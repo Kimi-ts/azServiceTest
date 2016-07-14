@@ -62,12 +62,14 @@ app.controller("controller1", ['$scope', 'ngAudio', 'AudioData', function ($scop
     $scope.playNext = function (audio) {
         if (audio.playlistIndex < $scope.audios.length - 1) {
             $scope.playSong($scope.audios[audio.playlistIndex + 1]);
-        }
+            incSkips(audio.name);
+        };
     };
 
     $scope.playPrev = function (audio) {
         if (audio.playlistIndex > 0) {
             $scope.playSong($scope.audios[audio.playlistIndex - 1]);
+            incSkips(audio.name);
         };
     };
 
@@ -94,5 +96,9 @@ app.controller("controller1", ['$scope', 'ngAudio', 'AudioData', function ($scop
 
     var incPlays = function (songName) {
         audioData.incPlays(songName);
-    }
+    };
+
+    var incSkips = function (songName) {
+        audioData.incSkips(songName);
+    };
 }]);
