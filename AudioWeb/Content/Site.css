@@ -2,6 +2,11 @@
     padding: 50px 30%;
 }
 
+button{
+    border: none;
+    outline: none;
+}
+
 /* Set padding to keep content from hitting the edges */
 
 html{
@@ -15,6 +20,28 @@ header h2{
 
 .content{
     text-align: left;
+}
+
+.play-button{
+    width: 23px;
+    height: 23px;
+    vertical-align: middle;
+}
+
+.play-button.prev:after{
+    content: "\23EA";
+}
+
+.play-button.next:after{
+    content: "\23E9";
+}
+
+.play-button.play:after{
+    content: "\25BA";
+}
+
+.play-button.stop:after{
+    content: "\275A \275A";
 }
 
 /* Set width on the form input elements since they're 100% wide by default */

@@ -10,10 +10,10 @@
     </header>
     <div ng-app="module1" ng-controller="controller1" class="content">
         <div class="audio-controls">
-            <button ng-click="play(currentAudio.audio)">Play</button>
-            <button ng-click="reset(currentAudio.audio)">Reset</button>
-            <button ng-click="playNext(currentAudio)">Next</button>
-            <button ng-click="playPrev(currentAudio)">Prev</button>
+            @*<button ng-click="reset(currentAudio.audio)">Reset</button>*@
+            <button ng-click="playPrev(currentAudio)" class="play-button prev"></button>
+            <button ng-click="play(currentAudio.audio)" class="play-button" ng-class="currentAudio.audio.paused ? 'play' : 'stop'"></button>
+            <button ng-click="playNext(currentAudio)" class="play-button next"></button>
             <input type="range" step="0.01" min="0" max="1" ng-model="currentAudio.audio.progress" />
             <label>{{currentAudio.audio.progress}}</label>
         </div>
