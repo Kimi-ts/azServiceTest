@@ -41,7 +41,8 @@ header h2{
 }
 
 .play-button.stop:after{
-    content: "\275A \275A";
+    content: "||";
+    font-weight: bold;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
