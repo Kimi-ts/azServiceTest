@@ -14,13 +14,12 @@
             <button ng-click="playPrev(currentAudio)" class="play-button prev"></button>
             <button ng-click="play(currentAudio.audio)" class="play-button" ng-class="currentAudio.audio.paused ? 'play' : 'stop'"></button>
             <button ng-click="playNext(currentAudio)" class="play-button next"></button>
-            <input type="range" step="0.01" min="0" max="1" ng-model="currentAudio.audio.progress" />
-            <label>{{currentAudio.audio.progress}}</label>
+            <input type="range" step="0.01" min="0" max="1" class="play-progress" ng-model="currentAudio.audio.progress" />
+            <button ng-click="refreshData()" class="play-button refresh"></button>
         </div>
         <div class="song" ng-class="{'current': (audio == currentAudio)}" ng-repeat="audio in audios" ng-click="playSong(audio)">
             <p>{{audio.name}} <span> Plays: {{audio.plays}};</span><span> Skips: {{audio.skips}}</span></p>
         </div>
-        <div><button ng-click="refreshData()">Refresh</button></div>
     </div>
 
     @Scripts.Render("~/bundles/audioApp")

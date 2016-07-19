@@ -45,6 +45,17 @@ header h2{
     font-weight: bold;
 }
 
+.play-button.refresh:after{
+    content: "\21BB";
+    font-weight: bold;
+}
+
+input.play-progress{
+    max-width: 350px;
+    width: 350px;
+    vertical-align: sub;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
