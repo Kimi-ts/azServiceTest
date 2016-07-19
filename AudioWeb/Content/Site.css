@@ -22,6 +22,10 @@ header h2{
     text-align: left;
 }
 
+.audio-controls-container{
+    margin: 10px 0 30px 0;
+}
+
 .play-button{
     width: 23px;
     height: 23px;
@@ -56,11 +60,20 @@ input.play-progress{
     vertical-align: sub;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+table.audio-grid{
+    width: 100%;
+    border-spacing:0;
+    border-color: darkgray;
+    /*background-color: gainsboro;*/
+}
+
+table.audio-grid tr{
+    background-color: ghostwhite;
+    height: 30px;
+}
+
+table.audio-grid tr:nth-child(2n+1){
+    background-color: gainsboro;
 }
 
 .song {
@@ -68,5 +81,5 @@ textarea {
 }
 
 .song.current {
-    color: blue;
+    font-weight:bold;
 }
