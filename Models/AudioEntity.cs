@@ -9,6 +9,7 @@ namespace Models
     public class AudioEntity : TableEntity
     {
         public string Title { get; set; }
+        public string Artist { get; set; }
         public int Plays { get; set; }
         public int Skips { get; set; }
     }

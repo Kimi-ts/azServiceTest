@@ -9,6 +9,7 @@ namespace Models
     public class Audio
     {
         public string Name { get; set; }
+        public string Artist { get; set; }
         public string Src { get; set; }
         public int Plays { get; set; }
         public int Skips { get; set; }

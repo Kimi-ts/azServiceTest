@@ -32,7 +32,9 @@ namespace AudioWeb.Controllers
             {
                 int plays = audioEntities.Where(c => c.Title == song.Name).Select(p => p.Plays).FirstOrDefault();
                 int skips = audioEntities.Where(c => c.Title == song.Name).Select(p => p.Skips).FirstOrDefault();
+                string artist = audioEntities.Where(c => c.Title == song.Name).Select(p => p.Artist).FirstOrDefault();
 
+                song.Artist = artist;
                 song.Plays = plays;
                 song.Skips = skips;
             }

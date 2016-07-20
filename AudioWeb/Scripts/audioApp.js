@@ -14,6 +14,7 @@ app.controller("controller1", ['$scope', 'ngAudio', 'AudioData', function ($scop
                     src: val.Src,
                     audio: ngAudio.load(val.Src),
                     name: val.Name,
+                    artist: val.Artist,
                     plays: val.Plays,
                     skips: val.Skips,
                     playlistIndex: i
