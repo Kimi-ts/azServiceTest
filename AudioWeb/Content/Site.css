@@ -76,6 +76,16 @@ table.audio-grid tr:nth-child(2n+1){
     background-color: gainsboro;
 }
 
+table.audio-grid td:first-child{
+    width: 5%;
+}
+
+table.audio-grid tr.current td:nth-child(2) div:after{
+    content: "\266A";
+    position: relative;
+    left: 5px;
+}
+
 .song {
     cursor: pointer;
 }
