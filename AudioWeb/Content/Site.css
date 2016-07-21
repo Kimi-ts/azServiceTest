@@ -23,8 +23,21 @@ header h2{
 }
 
 .audio-controls-container{
-    margin: 10px 0 30px 0;
     text-align: center;
+}
+
+.artist-label{
+    font-weight: bold;
+}
+
+.audio-title-label{
+    font-style: italic;
+}
+
+.single-audio-controls-container{
+    border: 1px solid gainsboro;
+    background-color: lightgrey;
+    padding: 10px;
 }
 
 .play-button{
@@ -55,10 +68,18 @@ header h2{
     font-weight: bold;
 }
 
-input.play-progress{
-    max-width: 350px;
-    width: 350px;
+input.play-progress, input.play-volume{
     vertical-align: sub;
+}
+
+input.play-progress{
+    max-width: 200px;
+    width: 250px;
+}
+
+input.play-volume{
+    max-width: 100px;
+    width: 100px;
 }
 
 table.audio-grid{

@@ -10,12 +10,19 @@
     </header>
     <div ng-app="module1" ng-controller="controller1" class="content">
         <div class="audio-controls-container">
-            @*<button ng-click="reset(currentAudio.audio)">Reset</button>*@
-            <button ng-click="playPrev(currentAudio)" class="play-button prev"></button>
-            <button ng-click="play(currentAudio.audio)" class="play-button" ng-class="currentAudio.audio.paused ? 'play' : 'stop'"></button>
-            <button ng-click="playNext(currentAudio)" class="play-button next"></button>
-            <input type="range" step="0.01" min="0" max="1" class="play-progress" ng-model="currentAudio.audio.progress" />
-            <button ng-click="refreshData()" class="play-button refresh"></button>
+            <span class="current-audio-controls-container">
+                @*<button ng-click="reset(currentAudio.audio)">Reset</button>*@
+                <button ng-click="playPrev(currentAudio)" class="play-button prev"></button>
+                <button ng-click="play(currentAudio.audio)" class="play-button" ng-class="currentAudio.audio.paused ? 'play' : 'stop'"></button>
+                <button ng-click="playNext(currentAudio)" class="play-button next"></button>
+                <input type="range" step="0.01" min="0" max="1" class="play-volume" ng-model="currentAudio.audio.volume" />
+                <button ng-click="refreshData()" class="play-button refresh"></button>
+            </span>
+            <div class="single-audio-controls-container">
+                <div class="artist-label">{{currentAudio.artist}}</div>
+                <div class="audio-title-label">{{currentAudio.name}}</div>
+                <input type="range" step="0.01" min="0" max="1" class="play-progress" ng-model="currentAudio.audio.progress" />
+            </div>
         </div>
         <table class="audio-grid" border="0">
             <tr>
