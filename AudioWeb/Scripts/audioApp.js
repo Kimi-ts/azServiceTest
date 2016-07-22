@@ -22,7 +22,6 @@ app.controller("controller1", ['$scope', 'ngAudio', 'AudioData', function ($scop
 
                 $scope.audios.push(value);
             });
-
             $scope.currentAudio = $scope.audios[0];
 
             $.map($scope.audios, function (val, i) {
@@ -103,3 +102,16 @@ app.controller("controller1", ['$scope', 'ngAudio', 'AudioData', function ($scop
         audioData.incSkips(songName);
     };
 }]);
+
+app.filter("timeInMins", function () {
+    return function (x) {
+        var res = "00:00";
+        var seconds = Math.floor(x % 60);
+        var mins = Math.floor(x / 60);
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+        res = mins + ":" + seconds;
+        return res;
+    };
+});
