@@ -55,6 +55,9 @@ app.controller("controller1", ['$scope', 'ngAudio', 'AudioData', function ($scop
     };
 
     $scope.playSong = function (audio) {
+        //save volume state
+        audio.audio.setVolume($scope.currentAudio.audio.volume);
+
         $scope.currentAudio = audio;
         $scope.play($scope.currentAudio.audio);
     };
