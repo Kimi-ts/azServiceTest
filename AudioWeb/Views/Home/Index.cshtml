@@ -31,6 +31,7 @@
                 <th></th>
                 <th>Title</th>
                 <th>Artist</th>
+                <th>Time</th>
                 <th>Plays</th>
                 <th>Skips</th>
             </tr>
@@ -38,6 +39,7 @@
                 <td>{{$index+1}}</td>
                 <td><div>{{audio.name}}</div></td>
                 <td>{{audio.artist}}</td>
+                <td>{{audio.audio.duration | timeInMins}}</td>
                 <td>{{audio.plays}}</td>
                 <td>{{audio.skips}}</td>
             </tr>

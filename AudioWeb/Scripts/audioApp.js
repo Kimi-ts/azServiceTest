@@ -19,9 +19,9 @@ app.controller("controller1", ['$scope', 'ngAudio', 'AudioData', function ($scop
                     skips: val.Skips,
                     playlistIndex: i
                 };
-
                 $scope.audios.push(value);
             });
+            //console.log($scope.audios[0]);
             $scope.currentAudio = $scope.audios[0];
 
             $.map($scope.audios, function (val, i) {
