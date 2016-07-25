@@ -3,6 +3,8 @@
 app.controller("controller1", ['$scope', 'ngAudio', 'AudioData', function ($scope, ngAudio, audioData) {
     var self = this;
 
+    $scope.isRepeat = false;
+
     audioData.getAll({
     }).then(function (response) {
         console.log(response.data);
@@ -29,7 +31,12 @@ app.controller("controller1", ['$scope', 'ngAudio', 'AudioData', function ($scop
                 val.audio.complete(function () {
                     if (audio.paused) {
                         audio.setProgress(0);
-                        $scope.playNext(val, true);
+                        if ($scope.isRepeat) {
+                            $scope.play(audio);
+                        }
+                        else {
+                            $scope.playNext(val, true);
+                        }
                         incPlays(val.name);
                     }
                     return false;

@@ -68,6 +68,22 @@ header h2{
     font-weight: bold;
 }
 
+.play-button.repeat{
+    background-color: transparent;
+    vertical-align: top;
+    color: gray;
+    font-weight:lighter;
+}
+
+.play-button.repeat.active{
+    color: black;
+    font-weight: bold;
+}
+
+.play-button.repeat:after{
+    content: "\1F501";
+}
+
 input.play-progress, input.play-volume{
     vertical-align: sub;
 }

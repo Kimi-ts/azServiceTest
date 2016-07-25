@@ -21,6 +21,7 @@
             <div class="single-audio-controls-container">
                 <div class="artist-label">{{currentAudio.artist}}</div>
                 <div class="audio-title-label">{{currentAudio.name}}</div>
+                <button ng-click="isRepeat = !isRepeat" class="play-button repeat" ng-class="isRepeat ? 'active' : ''"></button>
                 <label>{{currentAudio.audio.currentTime | timeInMins }}</label>
                 <input type="range" step="0.01" min="0" max="1" class="play-progress" ng-model="currentAudio.audio.progress" />
                 <label>{{currentAudio.audio.remaining | timeInMins}}</label>
