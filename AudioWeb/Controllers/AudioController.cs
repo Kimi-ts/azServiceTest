@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Mime;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 
 namespace AudioWeb.Controllers
@@ -40,6 +43,51 @@ namespace AudioWeb.Controllers
             }
 
             return audios;
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> Post()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+            //string root = HttpContext.Current.Server.MapPath("~/App_Data");
+           // var provider = new MultipartFormDataStreamProvider(root);
+
+            try
+            {
+                //// Read the form data.
+                //await Request.Content.ReadAsMultipartAsync(provider);
+
+                //// This illustrates how to get the file names.
+                //foreach (MultipartFileData file in provider.FileData)
+                //{
+                //    //Trace.WriteLine(file.Headers.ContentDisposition.FileName);
+                //    //Trace.WriteLine("Server file path: " + file.LocalFileName);
+                //    var c = file.Headers.ContentDisposition.FileName;
+                //    var m = "Server file path: " + file.LocalFileName;
+                //}
+
+                var filesReadToProvider = await Request.Content.ReadAsMultipartAsync();
+
+                foreach (var stream in filesReadToProvider.Contents)
+                {
+                    if (stream.Headers.GetValues("Content-Type").FirstOrDefault() == "audio/mp3")
+                    {
+                        var fileBytes = await stream.ReadAsByteArrayAsync();
+                        var fileName = stream.Headers.ContentDisposition.FileName.ToString();
+                        _audioStorage.UploadFile(fileBytes, fileName);
+                    }
+
+                }
+                return Request.CreateResponse(HttpStatusCode.OK);
+
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         // PUT: api/audio/IncPlays

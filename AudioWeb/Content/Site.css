@@ -84,6 +84,10 @@ header h2{
     content: "\1F501";
 }
 
+.play-button.add:after{
+    content: "\2795"
+}
+
 input.play-progress, input.play-volume{
     vertical-align: sub;
 }

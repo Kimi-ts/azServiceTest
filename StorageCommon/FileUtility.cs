@@ -3,7 +3,9 @@ using Microsoft.WindowsAzure.Storage.File;
 using Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace StorageCommon
@@ -54,6 +56,20 @@ namespace StorageCommon
             }
 
             return audios;
+        }
+
+        public bool UploadFile(byte[] fileBytes, string filename)
+        {
+            CloudFileClient fileClient = _storageAccount.CreateCloudFileClient();
+            CloudFileShare fileShare = fileClient.GetShareReference(_folderName);
+            CloudFileDirectory rootDirectory = fileShare.GetRootDirectoryReference();
+
+            filename = string.IsNullOrEmpty(filename) ? "janneAhonen.mp3" : filename.Replace("\"", "");
+
+            CloudFile newFile = rootDirectory.GetFileReference(filename);
+            newFile.BeginUploadFromByteArray(fileBytes, 0, fileBytes.Length, null, null);
+
+            return true;
         }
     }
 }

@@ -45,10 +45,10 @@ app.controller("controller1", ['$scope', 'ngAudio', 'AudioData', function ($scop
         }
     });
 
-    $scope.reset = function (audio) {
-        audio.pause();
-        audio.setProgress(0);
-    };
+    //$scope.reset = function (audio) {
+    //    audio.pause();
+    //    audio.setProgress(0);
+    //};
 
     $scope.play = function (audio) {
         $.map($scope.audios, function (val, i) {
@@ -113,6 +113,27 @@ app.controller("controller1", ['$scope', 'ngAudio', 'AudioData', function ($scop
     var incSkips = function (songName) {
         audioData.incSkips(songName);
     };
+
+    $scope.uploadedFile = function (element) {
+        console.log("uploaded file function called in controller")
+        $scope.$apply(function ($scope) {
+            $scope.files = element.files;
+            console.log($scope.files)
+        });
+    };
+
+    $scope.addFile = function () {
+        audioData.postFile($scope.files,
+          function (msg) // success
+          {
+              console.log('uploaded');
+          },
+          function (msg) // error
+          {
+              console.log(msg);
+              console.log('error');
+          });
+    }
 }]);
 
 app.filter("timeInMins", function () {

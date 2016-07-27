@@ -1,4 +1,4 @@
-﻿app.factory('AudioData', ['$http', function ($http) {
+﻿app.factory('AudioData', ['$http', 'uploadFileService', function ($http, uploadFileService) {
     return {
         getAll: function (params) {
             return $http.get('/api/audio', {
@@ -21,13 +21,19 @@
                 data: JSON.stringify(params),
                 headers: { "Content-Type": "application/json", Accept: "application/json" }
             });
+        },
+
+        postFile: function (files) {
+            console.log("files");
+            console.log(files);
+            uploadFileService.uploadfile(files)
         }
     }
 }]);
 
-app.service('AudioService', ['AudioData', function (AudioData) {
+//app.service('AudioService', ['AudioData', function (AudioData) {
 
-}]);
+//}]);
 
 ////module1.controller('WidgetController', function (WidgetData) {
 ////    WidgetData.get({

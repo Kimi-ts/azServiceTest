@@ -17,6 +17,7 @@
                 <button ng-click="playNext(currentAudio, false)" class="play-button next"></button>
                 <input type="range" step="0.01" min="0" max="1" class="play-volume" ng-model="currentAudio.audio.volume" />
                 <button ng-click="refreshData()" class="play-button refresh"></button>
+                <button class="play-button add"></button>
             </span>
             <div class="single-audio-controls-container">
                 <div class="artist-label">{{currentAudio.artist}}</div>
@@ -45,6 +46,15 @@
                 <td>{{audio.skips}}</td>
             </tr>
         </table>
+        <div>
+            <form name="upload" class="form" data-ng-submit="addFile()" enctype="multipart/form-data">
+                <div>Track Title<input type="text" /></div>
+                <div>Artist Name <input type="text" /></div>
+                <input type="file" name="audio" multiple
+                       onchange="angular.element(this).scope().uploadedFile(this)" />
+                <button type="submit">Upload </button>
+            </form>
+        </div>
     </div>
     @Scripts.Render("~/bundles/audioApp")
 </body>
