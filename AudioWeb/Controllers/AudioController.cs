@@ -73,11 +73,14 @@ namespace AudioWeb.Controllers
 
                 foreach (var stream in filesReadToProvider.Contents)
                 {
-                    if (stream.Headers.GetValues("Content-Type").FirstOrDefault() == "audio/mp3")
+                    if (stream.Headers.ContentType != null)
                     {
-                        var fileBytes = await stream.ReadAsByteArrayAsync();
-                        var fileName = stream.Headers.ContentDisposition.FileName.ToString();
-                        _audioStorage.UploadFile(fileBytes, fileName);
+                        if (stream.Headers.GetValues("Content-Type").FirstOrDefault() == "audio/mp3")
+                        {
+                            var fileBytes = await stream.ReadAsByteArrayAsync();
+                            var fileName = stream.Headers.ContentDisposition.FileName.ToString();
+                            _audioStorage.UploadFile(fileBytes, fileName);
+                        }
                     }
 
                 }
