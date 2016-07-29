@@ -8,11 +8,9 @@ using System.Web;
 
 namespace StorageCommon
 {
-    public class QueueUtility
+    public class QueueUtility: ICloudQueueUtility
     {
         //NOTE - queue names are lowercase
-        private string _queueIncPlays = "plays";
-        private string _queueIncSkips = "skips";
 
         private CloudStorageAccount _storageAccount;
 
@@ -22,42 +20,17 @@ namespace StorageCommon
             _storageAccount = CloudStorageAccount.Parse(UserConnectionString);
         }
 
-        public bool UpdatePlays(string songName)
+        public bool AddMessage(string queueName, string message)
         {
-            return UpdateTable(songName, true, false);
-        }
-
-        public bool UpdateSkips(string songName)
-        {
-            return UpdateTable(songName, false, true);
-        }
-
-        private bool UpdateTable(string songName, bool updatePlays, bool updateSkips)
-        {
-            var queueName = string.Empty;
-            if (updatePlays)
-            {
-                queueName = _queueIncPlays;
-            }
-            else
-            {
-                if (updateSkips)
-                {
-                    queueName = _queueIncSkips;
-                }
-            }
             if (string.IsNullOrEmpty(queueName))
             {
                 return false;
             }
-            //CloudQueueClient queueClient = _storageAccount.CreateCloudQueueClient();
-            //var audioQueue = queueClient.GetQueueReference(queueName);
-            //audioQueue.CreateIfNotExists();
 
             var audioQueue = getQueue(queueName);
 
-            var message = StringUtility.GetBytes(songName);
-            audioQueue.AddMessage(new CloudQueueMessage(message));
+            var messageText = StringUtility.GetBytes(message);
+            audioQueue.AddMessage(new CloudQueueMessage(messageText));
 
             return true;
         }

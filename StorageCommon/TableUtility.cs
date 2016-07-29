@@ -8,7 +8,7 @@ using System.Web;
 
 namespace StorageCommon
 {
-    public class TableUtility
+    public class TableUtility: ICloudTableUtility
     {
         private string _tableName = "MusicMetrics";
 

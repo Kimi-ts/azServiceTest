@@ -10,7 +10,7 @@ using System.Web;
 
 namespace StorageCommon
 {
-    public class FileUtility
+    public class FileUtility: ICloudFileUtility
     {
         private string _folderName = "music";
 

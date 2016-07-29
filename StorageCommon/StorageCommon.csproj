@@ -68,7 +68,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AudioService.cs" />
     <Compile Include="FileUtility.cs" />
+    <Compile Include="ICloudFileUtility.cs" />
+    <Compile Include="ICloudQueueUtility.cs" />
+    <Compile Include="ICloudTableUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueueUtility.cs" />
     <Compile Include="StringUtility.cs" />

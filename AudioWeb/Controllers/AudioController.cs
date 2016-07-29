@@ -14,33 +14,23 @@ namespace AudioWeb.Controllers
 {
     public class AudioController : ApiController
     {
-        private FileUtility _audioStorage;
-        private TableUtility _tableUtility;
-        private QueueUtility _queueUtility;
+        private AudioService _audioService;
 
         public AudioController()
         {
-            _audioStorage = new FileUtility("zz1zz", "RDYGKOyoiv2nZMD8qXrIHY+gcLE2I5c3vnaPQBuubRNEt7+V/8/iTTwPgu3mQWiyfrpKSrIF2m6FgzaX4jB5Ow==");
-            _tableUtility = new TableUtility("zz1zz", "RDYGKOyoiv2nZMD8qXrIHY+gcLE2I5c3vnaPQBuubRNEt7+V/8/iTTwPgu3mQWiyfrpKSrIF2m6FgzaX4jB5Ow==");
-            _queueUtility = new QueueUtility("zz1zz", "RDYGKOyoiv2nZMD8qXrIHY+gcLE2I5c3vnaPQBuubRNEt7+V/8/iTTwPgu3mQWiyfrpKSrIF2m6FgzaX4jB5Ow==");
+            ICloudFileUtility audioStorage = new FileUtility("zz1zz", "RDYGKOyoiv2nZMD8qXrIHY+gcLE2I5c3vnaPQBuubRNEt7+V/8/iTTwPgu3mQWiyfrpKSrIF2m6FgzaX4jB5Ow==");
+            ICloudTableUtility tableUtility = new TableUtility("zz1zz", "RDYGKOyoiv2nZMD8qXrIHY+gcLE2I5c3vnaPQBuubRNEt7+V/8/iTTwPgu3mQWiyfrpKSrIF2m6FgzaX4jB5Ow==");
+            ICloudQueueUtility queueUtility = new QueueUtility("zz1zz", "RDYGKOyoiv2nZMD8qXrIHY+gcLE2I5c3vnaPQBuubRNEt7+V/8/iTTwPgu3mQWiyfrpKSrIF2m6FgzaX4jB5Ow==");
+
+            _audioService = new AudioService(audioStorage, queueUtility, tableUtility);
         }
 
         // GET: api/audio
         [HttpGet]
         public IEnumerable<Audio> Get()
         {
-            List<Audio> audios = _audioStorage.DownloadAllFiles();
-            List<AudioEntity> audioEntities = _tableUtility.ReadAll();
-            foreach (var song in audios)
-            {
-                int plays = audioEntities.Where(c => c.Title == song.Name).Select(p => p.Plays).FirstOrDefault();
-                int skips = audioEntities.Where(c => c.Title == song.Name).Select(p => p.Skips).FirstOrDefault();
-                string artist = audioEntities.Where(c => c.Title == song.Name).Select(p => p.Artist).FirstOrDefault();
-
-                song.Artist = artist;
-                song.Plays = plays;
-                song.Skips = skips;
-            }
+            List<Audio> audios = new List<Audio>();
+            audios = _audioService.GetAll();
 
             return audios;
         }
@@ -52,23 +42,9 @@ namespace AudioWeb.Controllers
             {
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
-            //string root = HttpContext.Current.Server.MapPath("~/App_Data");
-           // var provider = new MultipartFormDataStreamProvider(root);
 
             try
             {
-                //// Read the form data.
-                //await Request.Content.ReadAsMultipartAsync(provider);
-
-                //// This illustrates how to get the file names.
-                //foreach (MultipartFileData file in provider.FileData)
-                //{
-                //    //Trace.WriteLine(file.Headers.ContentDisposition.FileName);
-                //    //Trace.WriteLine("Server file path: " + file.LocalFileName);
-                //    var c = file.Headers.ContentDisposition.FileName;
-                //    var m = "Server file path: " + file.LocalFileName;
-                //}
-
                 var filesReadToProvider = await Request.Content.ReadAsMultipartAsync();
 
                 foreach (var stream in filesReadToProvider.Contents)
@@ -79,7 +55,7 @@ namespace AudioWeb.Controllers
                         {
                             var fileBytes = await stream.ReadAsByteArrayAsync();
                             var fileName = stream.Headers.ContentDisposition.FileName.ToString();
-                            _audioStorage.UploadFile(fileBytes, fileName);
+                            _audioService.AddAudio(fileBytes, fileName);
                         }
                     }
 
@@ -97,13 +73,13 @@ namespace AudioWeb.Controllers
         [HttpPut]
         public void IncPlays([FromBody]string songName)
         {
-            _queueUtility.UpdatePlays(songName);
+            _audioService.IncPlays(songName);
         }
 
         [HttpPut]
         public void IncSkips([FromBody]string songName)
         {
-            _queueUtility.UpdateSkips(songName);
+            _audioService.IncSkips(songName);
         }
     }
 }
