@@ -10,6 +10,6 @@ namespace StorageCommon
     public interface ICloudQueueUtility
     {
         bool AddMessage(string queueName, string message);
-        CloudQueue getQueue(string queueName);
+        string GetMessage(string queueName);
     }
 }

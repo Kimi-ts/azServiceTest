@@ -17,6 +17,8 @@
             };
 
             fd.append("data", JSON.stringify(data));
+            console.log("data=");
+            console.log(data);
 
             $http.post(url, fd, {
                 withCredentials: false,

@@ -51,5 +51,24 @@ namespace StorageCommon
         {
             _queueUtility.AddMessage("skips", songName);
         }
+
+        public void UpdateAudioMetric(string metricname)
+        {
+            var songName = _queueUtility.GetMessage(metricname);
+            if (!string.IsNullOrEmpty(songName))
+            {
+                if (metricname == "plays")
+                {
+                    _tableUtility.UpdateAudioData(true, false, songName);
+                }
+                else
+                {
+                    if (metricname == "skips")
+                    {
+                        _tableUtility.UpdateAudioData(false, true, songName);
+                    }
+                }
+            }
+        }
     }
 }

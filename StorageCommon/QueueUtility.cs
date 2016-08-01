@@ -35,7 +35,20 @@ namespace StorageCommon
             return true;
         }
 
-        public CloudQueue getQueue(string queueName)
+        public string GetMessage(string queueName)
+        {
+            var audioQueue = getQueue(queueName);
+            var message = audioQueue.GetMessage();
+            if (message != null)
+            {
+                var messageText = StringUtility.GetString(message.AsBytes);
+                audioQueue.DeleteMessage(message);
+                return messageText;
+            }
+            return string.Empty;
+        }
+
+        private CloudQueue getQueue(string queueName)
         {
             CloudQueueClient queueClient = _storageAccount.CreateCloudQueueClient();
             var audioQueue = queueClient.GetQueueReference(queueName);

@@ -4,10 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using StorageCommon;
-using Microsoft.WindowsAzure.Storage.Queue;
 
 namespace AudioWorker
 {
@@ -15,8 +13,7 @@ namespace AudioWorker
     {
         private readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         private readonly ManualResetEvent runCompleteEvent = new ManualResetEvent(false);
-        private readonly TableUtility _tableUtility = new TableUtility("zz1zz", "RDYGKOyoiv2nZMD8qXrIHY+gcLE2I5c3vnaPQBuubRNEt7+V/8/iTTwPgu3mQWiyfrpKSrIF2m6FgzaX4jB5Ow==");
-        private readonly QueueUtility _queueUtility = new QueueUtility("zz1zz", "RDYGKOyoiv2nZMD8qXrIHY+gcLE2I5c3vnaPQBuubRNEt7+V/8/iTTwPgu3mQWiyfrpKSrIF2m6FgzaX4jB5Ow==");
+        private AudioService _audioService;
 
         public override void Run()
         {
@@ -34,6 +31,12 @@ namespace AudioWorker
         {
             ServicePointManager.DefaultConnectionLimit = 12;
 
+            ICloudFileUtility audioStorage = new FileUtility("zz1zz", "RDYGKOyoiv2nZMD8qXrIHY+gcLE2I5c3vnaPQBuubRNEt7+V/8/iTTwPgu3mQWiyfrpKSrIF2m6FgzaX4jB5Ow==");
+            ICloudTableUtility tableUtility = new TableUtility("zz1zz", "RDYGKOyoiv2nZMD8qXrIHY+gcLE2I5c3vnaPQBuubRNEt7+V/8/iTTwPgu3mQWiyfrpKSrIF2m6FgzaX4jB5Ow==");
+            ICloudQueueUtility queueUtility = new QueueUtility("zz1zz", "RDYGKOyoiv2nZMD8qXrIHY+gcLE2I5c3vnaPQBuubRNEt7+V/8/iTTwPgu3mQWiyfrpKSrIF2m6FgzaX4jB5Ow==");
+
+            _audioService = new AudioService(audioStorage, queueUtility, tableUtility);
+
             bool result = base.OnStart();
 
             return result;
@@ -49,27 +52,10 @@ namespace AudioWorker
 
         private async Task RunAsync(CancellationToken cancellationToken)
         {
-            CloudQueueMessage playsMsg = null;
-            CloudQueueMessage skipsMsg = null;
-            var playsQueue = _queueUtility.getQueue("plays");
-            var skipsQueue = _queueUtility.getQueue("skips");
             while (!cancellationToken.IsCancellationRequested)
             {
-                playsMsg = playsQueue.GetMessage();
-                if (playsMsg != null)
-                {
-                    var songName = StringUtility.GetString(playsMsg.AsBytes);
-                    _tableUtility.UpdateAudioData(true, false, songName);
-                    playsQueue.DeleteMessage(playsMsg);
-
-                }
-                skipsMsg = skipsQueue.GetMessage();
-                if (skipsMsg != null)
-                {
-                    var songName = StringUtility.GetString(skipsMsg.AsBytes);
-                    _tableUtility.UpdateAudioData(false, true, songName);
-                    skipsQueue.DeleteMessage(skipsMsg);
-                }
+                _audioService.UpdateAudioMetric("plays");
+                _audioService.UpdateAudioMetric("skips");
                 await Task.Delay(2000);
             }
         }
