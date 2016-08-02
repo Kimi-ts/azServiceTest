@@ -17,7 +17,7 @@
                 <button ng-click="playNext(currentAudio, false)" class="play-button next"></button>
                 <input type="range" step="0.01" min="0" max="1" class="play-volume" ng-model="currentAudio.audio.volume" />
                 <button ng-click="refreshData()" class="play-button refresh"></button>
-                <button class="play-button add"></button>
+                <button class="play-button add" ng-click="isShowAddPanel = !isShowAddPanel" ></button>
             </span>
             <div class="single-audio-controls-container">
                 <div class="artist-label">{{currentAudio.artist}}</div>
@@ -46,12 +46,14 @@
                 <td>{{audio.skips}}</td>
             </tr>
         </table>
-        <div>
+        <div ng-show="isShowAddPanel">
             <form name="upload" class="form" data-ng-submit="addFile()" enctype="multipart/form-data">
+                <h4>Add New File To The Playlist</h4>
                 <div>Track Title<input type="text" ng-model="newTitle" name="newTitle" /></div>
                 <div>Artist Name <input type="text" ng-model="newArtist" name="newArtist" /></div>
                 <input type="file" name="audio" onchange="angular.element(this).scope().uploadedFile(this)" />
                 <button type="submit">Upload</button>
+                <p>{{uploadError}}</p>
             </form>
         </div>
     </div>

@@ -22,10 +22,10 @@
                 headers: { "Content-Type": "application/json", Accept: "application/json" }
             });
         },
-        postFile: function (files, data) {
+        postFile: function (files, data, success, error) {
             console.log("files");
             console.log(files);
-            uploadFileService.uploadfile(files, data)
+            uploadFileService.uploadfile(files, data, success, error)
         }
     }
 }]);

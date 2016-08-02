@@ -4,6 +4,7 @@ app.controller("controller1", ['$scope', 'ngAudio', 'AudioData', function ($scop
     var self = this;
 
     $scope.isRepeat = false;
+    $scope.isShowAddPanel = false;
 
     audioData.getAll({
     }).then(function (response) {
@@ -131,10 +132,18 @@ app.controller("controller1", ['$scope', 'ngAudio', 'AudioData', function ($scop
             },
             function (msg) {
                 console.log('uploaded');
+                $scope.newTitle = "";
+                $scope.newArtist = "";
+                $scope.files = [];
+                $scope.isShowAddPanel = false;
             },
             function (msg) {
                 console.log(msg);
                 console.log('error');
+                $scope.newTitle = "";
+                $scope.newArtist = "";
+                $scope.files = [];
+                $scope.uploadError = msg;
             });
     };
 }]);

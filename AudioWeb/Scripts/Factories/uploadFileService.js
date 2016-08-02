@@ -23,11 +23,11 @@
                 transformRequest: angular.identity
             })
             .success(function (data) {
-                console.log(data);
+                success(data);
             })
             .error(function (data) {
-                console.log(data);
+                error(data);
             });
         }
-    }
+    };
 }]);
