@@ -28,10 +28,12 @@ namespace StorageCommon
                 int plays = audioEntities.Where(c => c.RowKey == song.Name).Select(p => p.Plays).FirstOrDefault();
                 int skips = audioEntities.Where(c => c.RowKey == song.Name).Select(p => p.Skips).FirstOrDefault();
                 string artist = audioEntities.Where(c => c.RowKey == song.Name).Select(p => p.Artist).FirstOrDefault();
+                string title = audioEntities.Where(c => c.RowKey == song.Name).Select(p => p.Title).FirstOrDefault();
 
                 song.Artist = artist;
                 song.Plays = plays;
                 song.Skips = skips;
+                song.Title = title;
             }
 
             return audios;

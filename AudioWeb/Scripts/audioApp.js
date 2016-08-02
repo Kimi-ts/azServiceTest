@@ -17,6 +17,7 @@ app.controller("controller1", ['$scope', 'ngAudio', 'AudioData', function ($scop
                     audio: ngAudio.load(val.Src),
                     name: val.Name,
                     artist: val.Artist,
+                    title: val.Title,
                     plays: val.Plays,
                     skips: val.Skips,
                     playlistIndex: i
@@ -123,20 +124,19 @@ app.controller("controller1", ['$scope', 'ngAudio', 'AudioData', function ($scop
     };
 
     $scope.addFile = function () {
-        var title = "The Delivery";
-        var artist = "Hurt";
-        audioData.postFile($scope.files, {artist: artist, title: title},
-
-          function (msg) // success
-          {
-              console.log('uploaded');
-          },
-          function (msg) // error
-          {
-              console.log(msg);
-              console.log('error');
-          });
-    }
+        var title = $scope.newTitle;
+        var artist = $scope.newArtist;
+        audioData.postFile($scope.files, {
+                artist: artist, title: title
+            },
+            function (msg) {
+                console.log('uploaded');
+            },
+            function (msg) {
+                console.log(msg);
+                console.log('error');
+            });
+    };
 }]);
 
 app.filter("timeInMins", function () {

@@ -21,7 +21,7 @@
             </span>
             <div class="single-audio-controls-container">
                 <div class="artist-label">{{currentAudio.artist}}</div>
-                <div class="audio-title-label">{{currentAudio.name}}</div>
+                <div class="audio-title-label">{{currentAudio.title}}</div>
                 <button ng-click="isRepeat = !isRepeat" class="play-button repeat" ng-class="isRepeat ? 'active' : ''"></button>
                 <label>{{currentAudio.audio.currentTime | timeInMins }}</label>
                 <input type="range" step="0.01" min="0" max="1" class="play-progress" ng-model="currentAudio.audio.progress" />
@@ -39,7 +39,7 @@
             </tr>
             <tr class="song" ng-class="{'current': (audio == currentAudio)}" ng-repeat="audio in audios" ng-click="playSong(audio)">
                 <td>{{$index+1}}</td>
-                <td><div>{{audio.name}}</div></td>
+                <td><div>{{audio.title}}</div></td>
                 <td>{{audio.artist}}</td>
                 <td>{{audio.audio.duration | timeInMins}}</td>
                 <td>{{audio.plays}}</td>
@@ -48,11 +48,10 @@
         </table>
         <div>
             <form name="upload" class="form" data-ng-submit="addFile()" enctype="multipart/form-data">
-                <div>Track Title<input type="text" /></div>
-                <div>Artist Name <input type="text" /></div>
-                <input type="file" name="audio" multiple
-                       onchange="angular.element(this).scope().uploadedFile(this)" />
-                <button type="submit">Upload </button>
+                <div>Track Title<input type="text" ng-model="newTitle" name="newTitle" /></div>
+                <div>Artist Name <input type="text" ng-model="newArtist" name="newArtist" /></div>
+                <input type="file" name="audio" onchange="angular.element(this).scope().uploadedFile(this)" />
+                <button type="submit">Upload</button>
             </form>
         </div>
     </div>
