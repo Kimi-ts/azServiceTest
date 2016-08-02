@@ -11,5 +11,6 @@ namespace StorageCommon
     {
         List<AudioEntity> ReadAll();
         void UpdateAudioData(bool isPlayed, bool isSkipped, string songTitle);
+        bool AddAudioData(string songTitle, string artist, string fileName);
     }
 }

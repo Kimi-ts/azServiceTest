@@ -25,9 +25,9 @@ namespace StorageCommon
             List<AudioEntity> audioEntities = _tableUtility.ReadAll();
             foreach (var song in audios)
             {
-                int plays = audioEntities.Where(c => c.Title == song.Name).Select(p => p.Plays).FirstOrDefault();
-                int skips = audioEntities.Where(c => c.Title == song.Name).Select(p => p.Skips).FirstOrDefault();
-                string artist = audioEntities.Where(c => c.Title == song.Name).Select(p => p.Artist).FirstOrDefault();
+                int plays = audioEntities.Where(c => c.RowKey == song.Name).Select(p => p.Plays).FirstOrDefault();
+                int skips = audioEntities.Where(c => c.RowKey == song.Name).Select(p => p.Skips).FirstOrDefault();
+                string artist = audioEntities.Where(c => c.RowKey == song.Name).Select(p => p.Artist).FirstOrDefault();
 
                 song.Artist = artist;
                 song.Plays = plays;
@@ -37,8 +37,9 @@ namespace StorageCommon
             return audios;
         }
 
-        public bool AddAudio(byte[] fileContent, string filename)
+        public bool AddAudio(byte[] fileContent, string filename, string artist, string title)
         {
+            _tableUtility.AddAudioData(title, artist, filename);
             return _fileUtility.UploadFile(fileContent, filename);
         }
 

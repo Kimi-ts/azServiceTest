@@ -46,6 +46,8 @@ namespace AudioWeb.Controllers
             try
             {
                 var filesReadToProvider = await Request.Content.ReadAsMultipartAsync();
+                var artist = HttpContext.Current.Request.Form["artist"];
+                var title = HttpContext.Current.Request.Form["title"];
 
                 foreach (var stream in filesReadToProvider.Contents)
                 {
@@ -55,11 +57,12 @@ namespace AudioWeb.Controllers
                         {
                             var fileBytes = await stream.ReadAsByteArrayAsync();
                             var fileName = stream.Headers.ContentDisposition.FileName.ToString();
-                            _audioService.AddAudio(fileBytes, fileName);
+                            _audioService.AddAudio(fileBytes, fileName, artist, title);
                         }
                     }
 
                 }
+
                 return Request.CreateResponse(HttpStatusCode.OK);
 
             }

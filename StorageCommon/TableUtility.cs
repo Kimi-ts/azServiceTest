@@ -36,6 +36,8 @@ namespace StorageCommon
             return audios;
         }
 
+
+
         public void UpdateAudioData(bool isPlayed, bool isSkipped, string songTitle)
         {
             CloudTableClient tableClient = _storageAccount.CreateCloudTableClient();
@@ -65,6 +67,29 @@ namespace StorageCommon
                 TableOperation updateOperation = TableOperation.Replace(updateEntity);
                 table.Execute(updateOperation);
             }
+        }
+
+        public bool AddAudioData(string songTitle, string artist, string fileName)
+        {
+            fileName = string.IsNullOrEmpty(fileName) ? "janneAhonen.mp3" : fileName.Replace("\"", "");
+            AudioEntity newAudioData = new AudioEntity();
+            newAudioData.Artist = artist;
+            newAudioData.PartitionKey = fileName;
+            newAudioData.RowKey = fileName;
+            newAudioData.Skips = 0;
+            newAudioData.Plays = 0;
+            newAudioData.Title = songTitle;
+
+            CloudTableClient tableClient = _storageAccount.CreateCloudTableClient();
+            CloudTable table = tableClient.GetTableReference(_tableName);
+
+            // Create the TableOperation object that inserts the customer entity.
+            TableOperation insertOperation = TableOperation.Insert(newAudioData);
+
+            // Execute the insert operation.
+            table.Execute(insertOperation);
+
+            return false;
         }
     }
 }

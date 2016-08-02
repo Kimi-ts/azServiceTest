@@ -123,7 +123,10 @@ app.controller("controller1", ['$scope', 'ngAudio', 'AudioData', function ($scop
     };
 
     $scope.addFile = function () {
-        audioData.postFile($scope.files,
+        var title = "The Delivery";
+        var artist = "Hurt";
+        audioData.postFile($scope.files, {artist: artist, title: title},
+
           function (msg) // success
           {
               console.log('uploaded');

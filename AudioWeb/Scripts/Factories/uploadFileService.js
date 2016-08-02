@@ -1,7 +1,7 @@
 ﻿app.service("uploadFileService", ['$http', function($http){
 
     return {
-        uploadfile: function (files, success, error) {
+        uploadfile: function (files, data, success, error) {
 
             var fd = new FormData();
             var url = '/api/audio';
@@ -10,15 +10,10 @@
                 fd.append('file', file);
             });
 
-            //sample data
-            var data = {
-                name: "kimi",
-                type: "raiikkonen"
-            };
-
-            fd.append("data", JSON.stringify(data));
-            console.log("data=");
-            console.log(data);
+            var artist = data.artist;
+            var title = data.title;
+            fd.append("artist", artist);
+            fd.append("title", title);
 
             $http.post(url, fd, {
                 withCredentials: false,
